@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-family: Verdana, sans-serif;
+  min-height: 100%;
+}
+
+body {
+  background: linear-gradient(to bottom, #8f67ff 0%, #6137d3 100%);
+  color: #070707;
+  font-size: 14px;
+}
+
+#app {
+  min-height: 100%;
+  width: 100%;
+}
+
+a,
+a:visited {
+  color: inherit;
+  text-decoration: inherit;
+  transition: color 200ms;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #8f67ff;
+}
