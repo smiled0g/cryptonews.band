@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { configureStore, history } from 'store/configure-store'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
+import { pingBandExtension } from 'store/app/Band/action'
 import Routes from './routes'
 
 let store
@@ -23,7 +24,9 @@ class App extends React.Component {
 
   async componentDidMount() {
     store = await configureStore()
-    this.setState({ loaded: true })
+    this.setState({ loaded: true }, () => {
+      setTimeout(() => store.dispatch(pingBandExtension()), 0)
+    })
   }
 
   render() {

@@ -7,7 +7,7 @@ const Container = styled.main`
   width: 100%;
   height: 38px;
   align-items: center;
-  line-height: 30px;
+  line-height: 36px;
   border-top: solid 2px #9a79f7;
   text-align: center;
 `

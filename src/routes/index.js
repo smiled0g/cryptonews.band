@@ -6,7 +6,8 @@ import Header from 'components/Header'
 import Footer from 'components/Footer'
 
 // Routes
-import News from 'routes/news/index.js'
+import News from 'routes/news'
+import Submit from 'routes/submit'
 
 const Container = styled.div`
   height: 100%;
@@ -35,6 +36,7 @@ export default () => (
       <Content>
         <Switch>
           <Route exact path="/" component={News} />
+          <Route exact path="/submit" component={Submit} />
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Content>
