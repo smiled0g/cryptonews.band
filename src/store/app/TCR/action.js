@@ -1,6 +1,7 @@
 import { createScopedActionTypes } from 'store/utils'
+import { EXTENSION_ID } from 'config'
 
-export const actionTypes = createScopedActionTypes('app.Band', [
+export const actionTypes = createScopedActionTypes('app.Vault', [
   'CONNECT',
   'DISCONNECT',
 ])
