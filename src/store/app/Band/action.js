@@ -14,17 +14,9 @@ export const connect = () => ({
   type: actionTypes.CONNECT,
 })
 
-export const submitNewProposal = (title, link) => async (
-  dispatch,
-  getStore
-) => {
-  console.log('submitNewProposal:', title, link)
-
+export const sendBandProtocolTask = param => async (dispatch, getStore) => {
   try {
-    window.postMessage(
-      { type: 'BAND_PROTOCOL', text: 'Hello from the webpage!' },
-      '*'
-    )
+    window.postMessage({ type: 'BAND_PROTOCOL', op: 'task', param: param }, '*')
   } catch (e) {
     console.log('Error', e)
   }

@@ -2,15 +2,18 @@ import React from 'react'
 import { connect, bindActions } from 'store'
 import { push } from 'connected-react-router'
 import Component from './renderer'
-import { submitNewProposal } from 'store/app/Band/action'
+import { CONTRACT_INFO } from 'config'
+import { sendBandProtocolTask } from 'store/app/Band/action'
 
 class Route extends React.Component {
   state = {
     title: '',
     url: '',
+    tokens: '1000',
   }
 
   onSubmit() {
+    const tokens = this.state.tokens.trim()
     const title = this.state.title.trim()
     const url = this.state.url.trim().toLowerCase()
 
@@ -18,21 +21,43 @@ class Route extends React.Component {
       return alert('Title must not be empty')
     }
 
+    if (title.length > 100) {
+      return alert('Title must contain no more than 100 characters')
+    }
+
     if (!(url.startsWith('http://') || url.startsWith('https://'))) {
       return alert('URL must starts with http:// or https://')
     }
 
-    this.props.submitNewProposal(title, url)
+    this.props.sendBandProtocolTask({
+      task: 'contract_method',
+      contractType: 'Registry',
+      contractAddress: CONTRACT_INFO.registry_address,
+      method: 'apply',
+      args: [
+        btoa(
+          JSON.stringify({
+            title,
+            url,
+          })
+        ),
+        tokens.split('.')[0] + [...Array(18).fill('0')].join(''),
+      ],
+    })
   }
 
   render() {
-    const { title, url } = this.state
+    const { title, url, tokens } = this.state
     return (
       <Component
         title={title}
         url={url}
-        onTitleChange={val => this.setState({ title: val })}
+        tokens={tokens}
+        onTitleChange={val =>
+          val.length <= 100 && this.setState({ title: val })
+        }
         onURLChange={val => this.setState({ url: val })}
+        onTokensChange={val => this.setState({ tokens: val })}
         onSubmit={this.onSubmit.bind(this)}
       />
     )
@@ -46,7 +71,7 @@ export default connect(
   dispatch =>
     bindActions(
       {
-        submitNewProposal,
+        sendBandProtocolTask,
       },
       dispatch
     )

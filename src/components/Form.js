@@ -8,6 +8,10 @@ export const Input = styled.input`
   border-radius: 4px;
   background: #ffffff;
   border: solid 1px #9a79f7;
+
+  &[disabled] {
+    background: #f1ecff;
+  }
 `
 
 export const TextArea = styled.textarea`
@@ -17,6 +21,10 @@ export const TextArea = styled.textarea`
   border-radius: 4px;
   background: #ffffff;
   border: solid 1px #9a79f7;
+
+  &[disabled] {
+    background: #f1ecff;
+  }
 `
 
 export const Label = styled.div`
@@ -25,11 +33,16 @@ export const Label = styled.div`
   margin-right: 10px;
   font-size: 13px;
   font-weight: bold;
+  line-height: 24px;
 `
 
 export const Field = styled.div`
   display: flex;
   margin: 5px 0;
+
+  i {
+    font-size: 1.5em;
+  }
 `
 
 export const Header = styled.div`

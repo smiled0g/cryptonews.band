@@ -1,5 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import moment from 'moment'
+import { connect, bindActions } from 'store'
+import { setKeyword } from 'store/app/Search/action'
+import ListItemAction from 'components/ListItemAction'
 
 const Container = styled.main`
   width: 100%;
@@ -25,21 +29,57 @@ const SubInfo = styled.div`
   color: #828282;
   font-size: 12px;
   line-height: 22px;
+
+  > * {
+    vertical-align: top;
+  }
 `
 
-export default ({ no, title, url, staking, poster, time, comments }) => (
+const Owner = styled.a`
+  display: inline-block;
+  max-width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 22px;
+`
+
+const Component = ({ item, order, setKeyword }) => (
   <Container>
-    <No>{no}.</No>
+    <No>{order}.</No>
     <Content>
       <Links>
-        <Title>{title}</Title>
-        <Url>({url})</Url>
+        <Title href={item.content.url} target="_blank">
+          {item.content.title}
+        </Title>
+        <Url
+          onClick={() =>
+            setKeyword(item.content.url.split('//')[1].split('/')[0])
+          }
+        >
+          ({item.content.url.split('//')[1].split('/')[0]})
+        </Url>
       </Links>
       <SubInfo>
-        {`${staking} BCN `}
-        {`by ${poster} ${time} ago | `}
-        {`${comments} comments`}
+        <span>{`${item.deposit} BCN `} by </span>
+        <Owner
+          onClick={e => {
+            setKeyword(item.owner)
+            e.preventDefault()
+          }}
+        >
+          {item.owner}
+        </Owner>
+        <span>{`${moment(item.app_expire * 1000).fromNow()} | `} </span>
+        <ListItemAction item={item} />
+        {/* {`${comments} comments`} */}
       </SubInfo>
     </Content>
   </Container>
 )
+
+export default connect(
+  undefined,
+  dispatch => bindActions({ setKeyword }, dispatch)
+)(Component)

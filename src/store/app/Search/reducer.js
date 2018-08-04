@@ -2,17 +2,13 @@ import { fromJS } from 'immutable'
 import { actionTypes } from './action'
 
 const initialState = fromJS({
-  vault: null,
-  mnemonic: null,
+  keyword: '',
 })
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case actionTypes.VAULT:
-      return state.set('vault', payload.value)
-
-    case actionTypes.MNEMONIC:
-      return state.set('mnemonic', payload.value)
+    case actionTypes.SET_KEYWORD:
+      return state.set('keyword', payload.keyword)
 
     default:
       return state

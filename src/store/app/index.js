@@ -4,11 +4,13 @@
 
 import { combineReducers } from 'redux'
 import Band from './Band/reducer'
-import Vault from './Vault/reducer'
+import List from './List/reducer'
+import Search from './Search/reducer'
 
 export default combineReducers({
   Band,
-  Vault,
+  List,
+  Search,
 
   // ^^^ Add more reducers here
 })

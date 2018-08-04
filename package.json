@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bandprotocol": "0.5.2",
+    "bandprotocol": "0.5.7",
+    "bignumber.js": "^7.2.1",
     "connected-react-router": "^4.3.0",
+    "fuse.js": "^3.2.1",
     "immutable": "^3.8.2",
+    "moment": "^2.22.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",

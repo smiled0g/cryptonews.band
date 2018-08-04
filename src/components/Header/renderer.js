@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import LogoSrc from 'assets/logo.svg'
 
@@ -76,22 +77,39 @@ const WalletStatus = styled.div`
   color: ${p => (p.connected ? '#6e3ef3' : '#f75353')};
 `
 
-export default ({ walletConnected }) => (
+const HighlightedLink = ({ path, ...props }) => (
+  <Link {...props} style={path === props.to ? { fontWeight: 'bold' } : {}} />
+)
+
+export default ({ walletConnected, onKeywordChange, keyword, path }) => (
   <Container>
     <Logo src={LogoSrc} />
     <H1>
-      <a href="/">Band Crypto News</a>
+      <Link to="/">Band Crypto News</Link>
     </H1>
     <Searchbar>
       <i className="icon ion-md-search" />
-      <Search />
+      <Search value={keyword} onChange={e => onKeywordChange(e.target.value)} />
       <SearchButton>
         <i className="icon ion-md-arrow-dropdown" />
       </SearchButton>
     </Searchbar>
     <Nav>
-      <a href="/tutorial">tutorial</a> | <a href="/proposals">proposals</a> |{' '}
-      <a href="/challenges">challenges</a> | <a href="/submit">submit</a>
+      <HighlightedLink path={path} to="/proposals">
+        proposals
+      </HighlightedLink>{' '}
+      |{' '}
+      <HighlightedLink path={path} to="/challenges">
+        challenges
+      </HighlightedLink>{' '}
+      |{' '}
+      <HighlightedLink path={path} to="/tutorial">
+        tutorial
+      </HighlightedLink>{' '}
+      |{' '}
+      <HighlightedLink path={path} to="/submit">
+        submit
+      </HighlightedLink>
     </Nav>
     <WalletStatus connected={walletConnected}>
       <i
