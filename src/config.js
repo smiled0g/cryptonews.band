@@ -1,4 +1,4 @@
-export const BLOCKCHAIN_ENDPOINT = 'http://blockchain.cryptonews.band'
+export const BLOCKCHAIN_ENDPOINT = 'https://blockchain.cryptonews.band'
 export const CONTRACT_INFO = {
   symbol: 'BCN',
   name: 'Crypto News',
