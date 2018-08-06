@@ -1,6 +1,5 @@
-export const BLOCKCHAIN_ENDPOINT = 'http://localhost:80/'
+export const BLOCKCHAIN_ENDPOINT = 'http://blockchain.cryptonews.band'
 export const CONTRACT_INFO = {
-  address: 'BX00 0000 0000 0000 0000 0000 0000 0000 0000',
   symbol: 'BCN',
   name: 'Crypto News',
   host: 'cryptonews.band',

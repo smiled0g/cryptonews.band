@@ -95,6 +95,10 @@ export default ({ walletConnected, onKeywordChange, keyword, path }) => (
       </SearchButton>
     </Searchbar>
     <Nav>
+      <HighlightedLink path={path} to="/">
+        listed
+      </HighlightedLink>{' '}
+      |{' '}
       <HighlightedLink path={path} to="/proposals">
         proposals
       </HighlightedLink>{' '}
@@ -103,10 +107,10 @@ export default ({ walletConnected, onKeywordChange, keyword, path }) => (
         challenges
       </HighlightedLink>{' '}
       |{' '}
-      <HighlightedLink path={path} to="/tutorial">
+      {/* <HighlightedLink path={path} to="/tutorial">
         tutorial
       </HighlightedLink>{' '}
-      |{' '}
+      |{' '} */}
       <HighlightedLink path={path} to="/submit">
         submit
       </HighlightedLink>

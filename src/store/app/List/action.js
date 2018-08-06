@@ -2,6 +2,7 @@ import { createScopedActionTypes } from 'store/utils'
 import client from 'store/utils/bandprotocol'
 import { CONTRACT_INFO } from 'config'
 import { BigNumber } from 'bignumber.js'
+import Base64 from 'base-64'
 
 export const actionTypes = createScopedActionTypes('app.List', ['UPDATE_ITEM'])
 
@@ -37,7 +38,9 @@ export const fetchItem = (itemId, freshness) => async (dispatch, getState) => {
     const item = { id: itemId, freshness }
 
     item.content = JSON.parse(
-      atob(await tcr.method('get_content').call(itemId))
+      decodeURIComponent(
+        escape(Base64.decode(await tcr.method('get_content').call(itemId)))
+      )
     )
     item.app_expire = (await tcr
       .method('get_app_expire')

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bandprotocol": "0.5.9",
+    "bandprotocol": "0.5.10",
+    "base-64": "^0.1.0",
     "bignumber.js": "^7.2.1",
     "connected-react-router": "^4.3.0",
     "fuse.js": "^3.2.1",

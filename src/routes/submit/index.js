@@ -4,6 +4,7 @@ import { push } from 'connected-react-router'
 import Component from './renderer'
 import { CONTRACT_INFO } from 'config'
 import { sendBandProtocolTask } from 'store/app/Band/action'
+import Base64 from 'base-64'
 
 class Route extends React.Component {
   state = {
@@ -35,11 +36,15 @@ class Route extends React.Component {
       contractAddress: CONTRACT_INFO.registry_address,
       method: 'apply',
       args: [
-        btoa(
-          JSON.stringify({
-            title,
-            url,
-          })
+        Base64.encode(
+          unescape(
+            encodeURIComponent(
+              JSON.stringify({
+                title,
+                url,
+              })
+            )
+          )
         ),
         tokens.split('.')[0] + [...Array(18).fill('0')].join(''),
       ],
