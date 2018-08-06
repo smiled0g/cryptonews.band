@@ -8,38 +8,38 @@ import { fetchItem } from 'store/app/List/action'
 
 class Route extends React.Component {
   state = {
-    reason: '',
+    choice: this.props.match.params.choice,
   }
 
   async componentDidMount() {
-    if (!this.props.item) {
-      // Fetch item
-      await this.props.fetchItem(this.props.match.params.id)
-    }
+    await this.props.fetchItem(this.props.match.params.id)
   }
 
-  onChallenge() {
+  onSubmitVote() {
     this.props.sendBandProtocolTask({
       task: 'contract_method',
-      contractType: 'Registry',
-      contractAddress: CONTRACT_INFO.registry_address,
-      method: 'challenge',
+      contractType: 'Voting',
+      contractAddress: CONTRACT_INFO.voting_address,
+      method: 'commit_vote',
       args: [this.props.match.params.id, this.state.reason],
+      extra: { nonce: 999999, choice: this.choice === 'keep' ? 1 : 0 },
     })
+  }
+  onKeep() {
+    this.state.push()
   }
 
   render() {
-    const { reason } = this.state
     if (!this.props.item) return null
+
+    console.log('X', this.props.item)
 
     return (
       <Component
         item={this.props.item}
-        reason={reason}
-        onReasonChange={val =>
-          val.length < 500 && this.setState({ reason: val })
-        }
-        onChallenge={this.onChallenge.bind(this)}
+        choice={this.state.choice}
+        onChoiceChange={val => this.setState({ choice: val })}
+        onSubmitVote={this.onSubmitVote.bind(this)}
       />
     )
   }

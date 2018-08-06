@@ -9,6 +9,7 @@ import Footer from 'components/Footer'
 import News from 'routes/news'
 import Submit from 'routes/submit'
 import Challenge from 'routes/challenge'
+import Vote from 'routes/vote'
 
 const Container = styled.div`
   height: 100%;
@@ -54,6 +55,8 @@ export default () => (
           />
           <Route exact path="/submit" component={Submit} />
           <Route exact path="/challenge/:id" component={Challenge} />
+          <Route exact path="/vote/:id/:choice" component={Vote} />
+          <Route exact path="/vote-result/:id" component={Vote} />
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Content>

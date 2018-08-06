@@ -54,9 +54,9 @@ const ColorButton = styled.button`
 
 const ButtonContainer = styled.div``
 
-export default ({ item, choice, vote, onChoiceChange, onSubmitVote }) => (
+export default ({ item, choice, vote, onChoiceChange, onVoteSubmit }) => (
   <Container>
-    <Header>Vote on the challenge</Header>
+    <Header>Challenge result</Header>
     <Field>
       <Label>Title:</Label>
       <TextArea value={item.content.title} rows={2} disabled />
@@ -101,7 +101,7 @@ export default ({ item, choice, vote, onChoiceChange, onSubmitVote }) => (
     </Field>
     <Field>
       <Label />
-      <Button onClick={onSubmitVote}>Submit Vote</Button>
+      <Button onClick={onVoteSubmit}>Submit Vote</Button>
     </Field>
   </Container>
 )

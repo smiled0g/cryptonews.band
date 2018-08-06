@@ -1,22 +1,18 @@
 import React from 'react'
 import { connect, bindActions } from 'store'
 import { push } from 'connected-react-router'
+import Component from './renderer'
 import { CONTRACT_INFO } from 'config'
 import { sendBandProtocolTask } from 'store/app/Band/action'
 import { fetchItem } from 'store/app/List/action'
 
-import Component from './renderer'
-
 class Route extends React.Component {
   state = {
-    reason: '',
+    choice: this.props.match.params.choice,
   }
 
   async componentDidMount() {
-    if (!this.props.item) {
-      // Fetch item
-      await this.props.fetchItem(this.props.match.params.id)
-    }
+    await this.props.fetchItem(this.props.match.params.id)
   }
 
   onChallenge() {
@@ -28,18 +24,20 @@ class Route extends React.Component {
       args: [this.props.match.params.id, this.state.reason],
     })
   }
+  onKeep() {
+    this.state.push()
+  }
 
   render() {
-    const { reason } = this.state
     if (!this.props.item) return null
+
+    console.log('X', this.props.item)
 
     return (
       <Component
         item={this.props.item}
-        reason={reason}
-        onReasonChange={val =>
-          val.length < 500 && this.setState({ reason: val })
-        }
+        choice={this.state.choice}
+        onChoiceChange={val => this.setState({ choice: val })}
         onChallenge={this.onChallenge.bind(this)}
       />
     )
