@@ -1,27 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Field, Input, TextArea, Label, Header, Button } from 'components/Form'
+import {
+  Field,
+  Input,
+  TextArea,
+  Label,
+  Header,
+  Button,
+  InfoPanel,
+  PleaseOpenWallet,
+} from 'components/Form'
 
 const Container = styled.article`
   width: 100%;
   max-width: 1000px;
 `
 
-const FuncDescription = styled.div`
-  color: #777777;
-  padding: 3px 0;
-  max-width: 450px;
-
-  a {
-    text-decoration: underline;
-  }
-`
-
 export default ({
   title,
   url,
   tokens,
+  hasSubmitted,
   onTitleChange,
   onURLChange,
   onTokensChange,
@@ -55,15 +55,19 @@ export default ({
       <Label>
         <i className="icon ion-md-help-circle-outline" />
       </Label>
-      <FuncDescription>
+      <InfoPanel>
         You need at least 1000 BCN tokens in order to propose a new link. Your
         listing may be challenged, and you may lost all your fund during the
         challenge process. <a href="/tutorial">Learn more.</a>
-      </FuncDescription>
+      </InfoPanel>
     </Field>
     <Field>
       <Label />
-      <Button onClick={onSubmit}>Submit</Button>
+      {hasSubmitted ? (
+        <PleaseOpenWallet />
+      ) : (
+        <Button onClick={onSubmit}>Submit</Button>
+      )}
     </Field>
   </Container>
 )

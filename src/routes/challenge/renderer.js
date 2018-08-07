@@ -2,24 +2,29 @@ import React from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 
-import { Field, Input, TextArea, Label, Header, Button } from 'components/Form'
+import {
+  Field,
+  Input,
+  TextArea,
+  Label,
+  Header,
+  Button,
+  InfoPanel,
+  PleaseOpenWallet,
+} from 'components/Form'
 
 const Container = styled.article`
   width: 100%;
   max-width: 1000px;
 `
 
-const FuncDescription = styled.div`
-  color: #777777;
-  padding: 3px 0;
-  max-width: 450px;
-
-  a {
-    text-decoration: underline;
-  }
-`
-
-export default ({ item, reason, onReasonChange, onChallenge }) => (
+export default ({
+  item,
+  reason,
+  hasSubmitted,
+  onReasonChange,
+  onChallenge,
+}) => (
   <Container>
     <Header>Challenge a listed entry</Header>
     <Field>
@@ -47,17 +52,21 @@ export default ({ item, reason, onReasonChange, onChallenge }) => (
       <Label>
         <i className="icon ion-md-help-circle-outline" />
       </Label>
-      <FuncDescription>
+      <InfoPanel>
         You need 1000 BCN tokens in order to challenge this listing. Once you
         submitted, other community members will vote whether they agree or not.{' '}
         <a href="/tutorial" target="_blank">
           Learn more.
         </a>
-      </FuncDescription>
+      </InfoPanel>
     </Field>
     <Field>
       <Label />
-      <Button onClick={onChallenge}>Challenge</Button>
+      {hasSubmitted ? (
+        <PleaseOpenWallet />
+      ) : (
+        <Button onClick={onChallenge}>Challenge</Button>
+      )}
     </Field>
   </Container>
 )

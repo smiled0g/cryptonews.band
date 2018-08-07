@@ -54,7 +54,14 @@ const ColorButton = styled.button`
 
 const ButtonContainer = styled.div``
 
-export default ({ item, choice, vote, onChoiceChange, onSubmitVote }) => (
+export default ({
+  item,
+  choice,
+  vote,
+  onChoiceChange,
+  onSubmitVote,
+  hasSubmitted,
+}) => (
   <Container>
     <Header>Vote on the challenge</Header>
     <Field>
@@ -101,7 +108,11 @@ export default ({ item, choice, vote, onChoiceChange, onSubmitVote }) => (
     </Field>
     <Field>
       <Label />
-      <Button onClick={onSubmitVote}>Submit Vote</Button>
+      {hasSubmitted ? (
+        <PleaseOpenWallet />
+      ) : (
+        <Button onClick={onSubmitVote}>Submit Vote</Button>
+      )}
     </Field>
   </Container>
 )

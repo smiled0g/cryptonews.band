@@ -11,6 +11,7 @@ class Route extends React.Component {
     title: '',
     url: '',
     tokens: '1000',
+    hasSubmitted: false,
   }
 
   onSubmit() {
@@ -49,15 +50,18 @@ class Route extends React.Component {
         tokens.split('.')[0] + [...Array(18).fill('0')].join(''),
       ],
     })
+
+    this.setState({ hasSubmitted: true })
   }
 
   render() {
-    const { title, url, tokens } = this.state
+    const { title, url, tokens, hasSubmitted } = this.state
     return (
       <Component
         title={title}
         url={url}
         tokens={tokens}
+        hasSubmitted={hasSubmitted}
         onTitleChange={val =>
           val.length <= 100 && this.setState({ title: val })
         }

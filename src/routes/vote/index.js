@@ -9,6 +9,7 @@ import { fetchItem } from 'store/app/List/action'
 class Route extends React.Component {
   state = {
     choice: this.props.match.params.choice,
+    hasSubmitted: false,
   }
 
   async componentDidMount() {
@@ -21,9 +22,11 @@ class Route extends React.Component {
       contractType: 'Voting',
       contractAddress: CONTRACT_INFO.voting_address,
       method: 'commit_vote',
-      args: [this.props.match.params.id, this.state.reason],
-      extra: { nonce: 999999, choice: this.choice === 'keep' ? 1 : 0 },
+      args: [this.props.item.active_challenge.poll_id, this.state.reason],
+      extra: { nonce: 999999, choice: this.state.choice === 'keep' ? 1 : 0 },
     })
+
+    this.setState({ hasSubmitted: true })
   }
   onKeep() {
     this.state.push()
@@ -40,6 +43,7 @@ class Route extends React.Component {
         choice={this.state.choice}
         onChoiceChange={val => this.setState({ choice: val })}
         onSubmitVote={this.onSubmitVote.bind(this)}
+        hasSubmitted={this.state.hasSubmitted}
       />
     )
   }

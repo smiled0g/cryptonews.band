@@ -60,7 +60,9 @@ export const fetchItem = (itemId, freshness) => async (dispatch, getState) => {
       .call(itemId)).toNumber()
 
     if (item.active_challenge) {
-      const pollId = (await tcr.method('get_poll_id').call(itemId)).toNumber()
+      const pollId = (await tcr
+        .method('get_poll_id')
+        .call(item.active_challenge)).toNumber()
       // Fetch active challenge
       item.active_challenge = { poll_id: pollId }
 

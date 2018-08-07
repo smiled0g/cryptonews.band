@@ -10,6 +10,7 @@ import Component from './renderer'
 class Route extends React.Component {
   state = {
     reason: '',
+    hasSubmitted: false,
   }
 
   async componentDidMount() {
@@ -27,10 +28,12 @@ class Route extends React.Component {
       method: 'challenge',
       args: [this.props.match.params.id, this.state.reason],
     })
+
+    this.setState({ hasSubmitted: true })
   }
 
   render() {
-    const { reason } = this.state
+    const { reason, hasSubmitted } = this.state
     if (!this.props.item) return null
 
     return (
@@ -41,6 +44,7 @@ class Route extends React.Component {
           val.length < 500 && this.setState({ reason: val })
         }
         onChallenge={this.onChallenge.bind(this)}
+        hasSubmitted={hasSubmitted}
       />
     )
   }

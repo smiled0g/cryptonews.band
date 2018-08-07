@@ -70,3 +70,29 @@ export const Button = styled.button`
     background: #662fff;
   }
 `
+
+export const InfoPanel = styled.div`
+  color: #777777;
+  padding: 3px 0;
+  max-width: 450px;
+
+  a {
+    text-decoration: underline;
+  }
+`
+
+export const NoticePanel = styled(InfoPanel)`
+  border-radius: 4px;
+  border: solid 1px #9a79f7;
+  padding: 3px 8px;
+  background: #ffffff;
+  color: #333333;
+`
+
+export const PleaseOpenWallet = () => (
+  <NoticePanel>
+    {'Please approve transaction from your wallet.'}
+    <br />
+    {'Use <Ctrl/Cmd + Space> for quick access.'}
+  </NoticePanel>
+)
