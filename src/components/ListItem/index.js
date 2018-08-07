@@ -62,6 +62,8 @@ const Component = ({ item, order, setKeyword }) => (
         </Url>
       </Links>
       <SubInfo>
+        <ListItemAction item={item} />
+        {' | '}
         <span>{`${item.deposit} BCN `} by </span>
         <Owner
           onClick={e => {
@@ -71,8 +73,7 @@ const Component = ({ item, order, setKeyword }) => (
         >
           {item.owner}
         </Owner>
-        <span>{`${moment(item.app_expire * 1000).fromNow()} | `} </span>
-        <ListItemAction item={item} />
+        <span>{moment(item.app_expire * 1000).fromNow()}</span>
         {/* {`${comments} comments`} */}
       </SubInfo>
     </Content>

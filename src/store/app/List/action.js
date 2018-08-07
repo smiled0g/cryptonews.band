@@ -3,6 +3,7 @@ import client from 'store/utils/bandprotocol'
 import { CONTRACT_INFO } from 'config'
 import { BigNumber } from 'bignumber.js'
 import Base64 from 'base-64'
+import { Promise } from 'core-js'
 
 export const actionTypes = createScopedActionTypes('app.List', ['UPDATE_ITEM'])
 
@@ -19,10 +20,12 @@ export const fetchAllItems = () => async (dispatch, getState) => {
     .method('active_list_length')
     .call()).toNumber()
 
-  for (let i = activeListLength - 1; i >= 0; i--) {
-    const itemId = await tcr.method('active_list_id_at').call(i)
-    await dispatch(fetchItem(itemId.toString(), activeListLength - i))
-  }
+  await Promise.all(
+    [...Array(activeListLength)].map(async (_, i) => {
+      const itemId = await tcr.method('active_list_id_at').call(i)
+      await dispatch(fetchItem(itemId.toString(), activeListLength - i))
+    })
+  )
 }
 
 export const fetchItem = (itemId, freshness) => async (dispatch, getState) => {
