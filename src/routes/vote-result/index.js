@@ -22,6 +22,7 @@ class Route extends React.Component {
       contractAddress: CONTRACT_INFO.registry_address,
       method: 'challenge',
       args: [this.props.match.params.id, this.state.reason],
+      extra: { choice: this.state.choice },
     })
   }
   onKeep() {
